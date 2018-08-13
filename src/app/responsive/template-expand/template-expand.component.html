@@ -1,0 +1,91 @@
+<div class="container container-fluid">
+  <br>
+  <div class="bootstrap-checkbox">
+    <input id="multiExpandableRows" type="checkbox" [(ngModel)]="column.multiExpandableRows"/>
+    <label for="multiExpandableRows">Multi Expandable Rows</label>
+  </div>
+  <hr>
+  <div class="bootstrap-checkbox">
+    <input id="providerType" type="checkbox" [(ngModel)]="column.providerType"/>
+    <label for="providerType">Provider Type</label>
+  </div>
+  <div class="bootstrap-checkbox">
+    <input id="applicationType" type="checkbox" [(ngModel)]="column.applicationType"/>
+    <label for="applicationType">Application Type</label>
+  </div>
+  <hr>
+  <mdata-table [indexColumn]="column.indexColumn"
+               [selectColumn]="column.selectColumn"
+               [items]="items"
+               [totalPages]="totalPages"
+               [totalItems]="totalItems"
+               [size]="size"
+               [indexColumnHeader]="'#'"
+               [multiExpandableRows]="column.multiExpandableRows"
+               [classTable]="''"
+               (reload)="reloadItems($event)"
+               [expandableRows]="true"
+               (rowClick)="rowClick($event)"
+               (rowDoubleClick)="rowDoubleClick($event)"
+               [rowTooltip]="rowTooltip">
+    <ng-template #dataTableExpand let-itemExpand="itemExpand">
+      <p class="text-info" *ngIf="itemExpand.NPI != null">NPI : {{itemExpand.NPI}}</p>
+      <p class="text-warning" *ngIf="itemExpand.providerName != null">Provider Name : {{itemExpand.providerName}}</p>
+      <p *ngIf="itemExpand.status != null && itemExpand.status != 'Pending'">Status : <span class="badge badge-dark">{{itemExpand.status}}</span></p>
+      <p *ngIf="itemExpand.status != null && itemExpand.status == 'Pending'">Status : <span class="badge badge-danger">{{itemExpand.status}}</span></p>
+      <p *ngIf="itemExpand.assignedTo != null">Assigned to : {{itemExpand.assignedTo}}</p>
+      <p class="text-info" *ngIf="itemExpand.applicationType != null">Application type : <span class="badge badge-dark">{{itemExpand.applicationType}}</span></p>
+      <p *ngIf="itemExpand.providerType != null">Provider Type : {{itemExpand.providerType}}</p>
+    </ng-template>
+    <mdata-table-column
+      [property]="'caseNumber'"
+      [header]="'Number'"
+      [sortable]="true"
+      [visible]="true"
+      [cellColors]="cellColor">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'NPI'"
+      [header]="'NPI'"
+      [breakpoints]="'xxs,xs'"
+      [sortable]="true">
+      <ng-template #dataTableCell let-item="item">
+        <button class="btn btn-outline-info btn-sm" (click)="buttonalert(item.NPI)">{{item.NPI}}</button>
+      </ng-template>
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'providerName'"
+      [header]="'Provider Name'"
+      [breakpoints]="'xxs,xs,sm'"
+      [sortable]="true"
+      [visible]="true">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'status'"
+      [header]="'Status'"
+      [breakpoints]="'xxs,xs,sm,md'"
+      [sortable]="false">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'assignedTo'"
+      [header]="'Assigned to'"
+      [sortable]="true"
+      [resizable]="true"
+      [visible]="true">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'applicationType'"
+      [header]="'Application Type'"
+      [breakpoints]="'xxs,xs,sm,md'"
+      [sortable]="true"
+      [visible]="column.applicationType">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'providerType'"
+      [header]="'Provider Type'"
+      [breakpoints]="'xxs,xs,sm,md,lgs'"
+      [sortable]="true"
+      [visible]="column.providerType">
+    </mdata-table-column>
+  </mdata-table>
+</div>

@@ -1,0 +1,71 @@
+<div class="container container-fluid">
+  <br>
+  <mdata-table [indexColumn]="column.indexColumn"
+               [selectColumn]="column.selectColumn"
+               [items]="items"
+               [totalPages]="totalPages"
+               [totalItems]="totalItems"
+               [size]="size"
+               [indexColumnHeader]="'#'"
+               [multiExpandableRows]="column.multiExpandableRows"
+               [classTable]="''"
+               (reload)="reloadItems($event)"
+               [expandableRows]="false"
+               (rowClick)="rowClick($event)">
+    <mdata-table-column
+      [property]="'caseNumber'"
+      [header]="'Number'"
+      [sortable]="true"
+      [visible]="true">
+      <ng-template #dataTableHeader let-item="item">
+        <span style="color: rgb(1,123,169)">Number</span>
+      </ng-template>
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'NPI'"
+      [header]="'NPI'"
+      [breakpoints]="'xxs,xs'"
+      [sortable]="true">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'providerName'"
+      [header]="'Provider Name'"
+      [breakpoints]="'xxs,xs,sm'"
+      [sortable]="true"
+      [visible]="true">
+      <ng-template #dataTableHeader let-item="item">
+        <span style="color: rgb(23,162,184)"><i>Provider Name</i> <i class="fa fa-users "></i></span>
+      </ng-template>
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'status'"
+      [header]="'Status'"
+      [breakpoints]="'xxs,xs,sm,md'"
+      [sortable]="false">
+      <ng-template #dataTableHeader let-item="item">
+        <span style="color: rgb(8,156,169)">Active</span>
+      </ng-template>
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'assignedTo'"
+      [header]="'Assigned to'"
+      [sortable]="true"
+      [resizable]="true"
+      [visible]="true">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'applicationType'"
+      [header]="'Application Type'"
+      [breakpoints]="'xxs,xs,sm,md'"
+      [sortable]="true"
+      [visible]="column.applicationType">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'providerType'"
+      [header]="'Provider Type'"
+      [breakpoints]="'xxs,xs,sm,md,lgs'"
+      [sortable]="true"
+      [visible]="column.providerType">
+    </mdata-table-column>
+  </mdata-table>
+</div>

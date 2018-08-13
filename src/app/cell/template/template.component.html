@@ -1,0 +1,71 @@
+<div class="container container-fluid">
+  <hr>
+  <mdata-table [indexColumn]="column.indexColumn"
+               [selectColumn]="column.selectColumn"
+               [items]="items"
+               [totalPages]="totalPages"
+               [totalItems]="totalItems"
+               [size]="size"
+               [indexColumnHeader]="'#'"
+               [multiExpandableRows]="column.multiExpandableRows"
+               [classTable]="''"
+               (reload)="reloadItems($event)"
+               [expandableRows]="false"
+               (rowClick)="rowClick($event)"
+               (rowDoubleClick)="rowDoubleClick($event)"
+               [rowTooltip]="rowTooltip">
+    <mdata-table-column
+      [property]="'caseNumber'"
+      [header]="'Number'"
+      [sortable]="true"
+      [visible]="true">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'NPI'"
+      [header]="'NPI'"
+      [breakpoints]="'xxs,xs'"
+      [sortable]="true">
+      <ng-template #dataTableCell let-item="item">
+        <button class="btn btn-outline-info btn-sm" (click)="buttonalert(item.NPI)">{{item.NPI}}</button>
+      </ng-template>
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'providerName'"
+      [header]="'Provider Name'"
+      [breakpoints]="'xxs,xs,sm'"
+      [sortable]="true"
+      [visible]="true">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'status'"
+      [header]="'Status'"
+      [breakpoints]="'xxs,xs,sm,md'"
+      [sortable]="false">
+      <ng-template #dataTableCell let-item="item">
+        <span *ngIf="item.status == 'InProgress'" class="text-info">{{item.status}}</span>
+        <span *ngIf="item.status == 'Pending'" class="text-danger">{{item.status}}</span>
+      </ng-template>
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'assignedTo'"
+      [header]="'Assigned to'"
+      [sortable]="true"
+      [resizable]="true"
+      [visible]="true">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'applicationType'"
+      [header]="'Application Type'"
+      [breakpoints]="'xxs,xs,sm,md'"
+      [sortable]="true"
+      [visible]="column.applicationType">
+    </mdata-table-column>
+    <mdata-table-column
+      [property]="'providerType'"
+      [header]="'Provider Type'"
+      [breakpoints]="'xxs,xs,sm,md,lgs'"
+      [sortable]="true"
+      [visible]="column.providerType">
+    </mdata-table-column>
+  </mdata-table>
+</div>
